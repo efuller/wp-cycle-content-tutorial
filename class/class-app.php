@@ -6,7 +6,7 @@
  * @since 1.0.0
  */
 
-namespace WPSP;
+namespace WPCCT;
 
 /**
  * Main App class.
