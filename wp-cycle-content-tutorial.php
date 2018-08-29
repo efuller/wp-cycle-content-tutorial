@@ -54,7 +54,8 @@ spl_autoload_register( 'wpcct_autoload_classes' );
 function wpcct_engage() {
 
 	// Kick things off.
-	new \WPCCT\Bootstrap();
+	$bootstrap = new \WPCCT\Bootstrap();
+	$bootstrap->register_hooks();
 }
 
 // Engage.

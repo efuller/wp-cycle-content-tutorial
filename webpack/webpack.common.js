@@ -4,9 +4,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {
 
-	entry: './src/',
+	entry: {
+		main: './src/front/index.js',
+		admin: './src/admin/index.js'
+	},
 	output: {
-		filename: 'main.js',
+		filename: 'js/[name].js',
 		path: commonPaths.outputPath
 	},
 	module: {
@@ -39,7 +42,13 @@ const config = {
 		]
 	},
 	plugins: [
-		new ProgressBar()
+		new ProgressBar(),
+		new ExtractTextPlugin({
+			filename: (getPath) => {
+				return getPath('js/css/[name].css').replace('js/css', 'css');
+			},
+			allChunks: true
+		})
 	]
 };
 
