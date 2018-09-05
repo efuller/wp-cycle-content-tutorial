@@ -65,5 +65,7 @@ class Bootstrap {
 		App::get( 'profile_cpt' )->register_hooks();
 		App::bind( 'profile_meta', new Profile_Meta() );
 		App::get( 'profile_meta' )->register_hooks();
+		App::bind( 'profile_ajax', new Ajax() );
+		App::get( 'profile_ajax' )->register_hooks();
 	}
 }
