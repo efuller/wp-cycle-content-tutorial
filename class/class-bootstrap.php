@@ -63,5 +63,7 @@ class Bootstrap {
 		App::get( 'dependencies' )->register_hooks();
 		App::bind( 'profile_cpt', new Profile_CPT() );
 		App::get( 'profile_cpt' )->register_hooks();
+		App::bind( 'profile_meta', new Profile_Meta() );
+		App::get( 'profile_meta' )->register_hooks();
 	}
 }
