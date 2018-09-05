@@ -14,7 +14,7 @@ class Profile_CPT {
 	 * Register CPT.
 	 */
 	public function setup_cpt() {
-		$labels = array(
+		$labels = [
 			'name'               => _x( 'Profiles', 'post type general name', 'wpcct' ),
 			'singular_name'      => _x( 'Profile', 'post type singular name', 'wpcct' ),
 			'menu_name'          => _x( 'Profiles', 'admin menu', 'wpcct' ),
@@ -29,9 +29,9 @@ class Profile_CPT {
 			'parent_item_colon'  => __( 'Parent Profiles:', 'wpcct' ),
 			'not_found'          => __( 'No books found.', 'wpcct' ),
 			'not_found_in_trash' => __( 'No books found in Trash.', 'wpcct' ),
-		);
+		];
 
-		$args = array(
+		$args = [
 			'labels'             => $labels,
 			'description'        => __( 'Description.', 'wpcct' ),
 			'public'             => true,
@@ -39,13 +39,13 @@ class Profile_CPT {
 			'show_ui'            => true,
 			'show_in_menu'       => true,
 			'query_var'          => true,
-			'rewrite'            => array( 'slug' => 'profile' ),
+			'rewrite'            => [ 'slug' => 'profile' ],
 			'capability_type'    => 'post',
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'supports'           => array( 'title', 'editor', 'author', 'thumbnail' ),
-		);
+			'supports'           => [ 'title', 'editor', 'author', 'thumbnail' ],
+		];
 
 		register_post_type( 'profile', $args );
 	}
@@ -54,6 +54,6 @@ class Profile_CPT {
 	 * Register custom WordPress hooks.
 	 */
 	public function register_hooks() {
-		add_action( 'init', array( $this, 'setup_cpt' ) );
+		add_action( 'init', [ $this, 'setup_cpt' ] );
 	}
 }

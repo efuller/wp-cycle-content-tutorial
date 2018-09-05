@@ -46,7 +46,7 @@ class Bootstrap {
 	 * @since 1.0.0
 	 */
 	public function register_hooks() {
-		add_action( 'plugins_loaded', array( $this, 'init' ) );
+		add_action( 'plugins_loaded', [ $this, 'init' ] );
 	}
 
 	/**

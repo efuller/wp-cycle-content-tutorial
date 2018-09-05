@@ -23,13 +23,13 @@ class Dependencies {
 	 */
 	public function register_hooks() {
 		// Enqueue styles.
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
 		// Enqueue admin styles.
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_styles' ] );
 		// Enqueue scripts.
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 		// Enqueue admin scripts.
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
+		add_action( 'admin_enqueue_scripts', [ $this, 'admin_scripts' ] );
 	}
 
 	/**
@@ -41,7 +41,7 @@ class Dependencies {
 		wp_enqueue_script(
 			App::get( 'basename' ) . 'admin-js',
 			App::get( 'plugin_url' ) . 'assets/js/admin.js',
-			array( 'jquery' ),
+			[ 'jquery' ],
 			App::get( 'version' )
 		);
 	}
@@ -55,7 +55,7 @@ class Dependencies {
 		wp_enqueue_style(
 			App::get( 'basename' ) . '-style',
 			App::get( 'plugin_url' ) . 'assets/css/main.css',
-			array(),
+			[],
 			App::get( 'version' )
 		);
 	}
@@ -69,7 +69,7 @@ class Dependencies {
 		wp_enqueue_style(
 			App::get( 'basename' ) . 'admin-style',
 			App::get( 'plugin_url' ) . 'assets/css/admin.css',
-			array(),
+			[],
 			App::get( 'version' )
 		);
 	}
@@ -83,7 +83,7 @@ class Dependencies {
 		wp_enqueue_script(
 			App::get( 'basename' ) . '-js',
 			App::get( 'plugin_url' ) . 'assets/js/main.js',
-			array( 'jquery' ),
+			[ 'jquery' ],
 			App::get( 'version' )
 		);
 	}

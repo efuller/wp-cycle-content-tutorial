@@ -11,7 +11,7 @@ class Profile_Meta {
 		add_meta_box(
 			'wpcct_job_title',
 			'Job Title',
-			array( $this, 'metabox_markup' ),
+			[ $this, 'metabox_markup' ],
 			'profile'
 		);
 	}
@@ -57,7 +57,7 @@ class Profile_Meta {
 	 * Register custom hooks.
 	 */
 	public function register_hooks() {
-		add_action( 'add_meta_boxes_profile', array( $this, 'add_metabox' ) );
-		add_action( 'save_post_profile', array( $this, 'save' ) );
+		add_action( 'add_meta_boxes_profile', [ $this, 'add_metabox' ] );
+		add_action( 'save_post_profile', [ $this, 'save' ] );
 	}
 }

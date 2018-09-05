@@ -26,7 +26,7 @@ class App {
 	 *
 	 * @since 1.0.0
 	 */
-	protected static $registry = array();
+	protected static $registry = [];
 
 	/**
 	 * Register a new dependency.
