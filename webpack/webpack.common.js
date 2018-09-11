@@ -6,7 +6,6 @@ const config = {
 
 	entry: {
 		main: './src/front/index.js',
-		admin: './src/admin/index.js'
 	},
 	output: {
 		filename: 'js/[name].js',
