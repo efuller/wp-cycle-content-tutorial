@@ -39,8 +39,13 @@ class Dependencies {
 	 * Inject markup and template onto page.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @return void
 	 */
 	public function inject_template() {
+		if ( ! is_post_type_archive( 'profile' ) ) {
+			return;
+		}
 		include Helpers::view( 'modal-tmpl' );
 		include Helpers::view( 'modal' );
 	}
