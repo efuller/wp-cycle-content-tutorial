@@ -60,12 +60,22 @@ class Bootstrap {
 		App::bind( 'plugin_directory', plugin_dir_path( $this->plugin_file ) );
 		App::bind( 'basename', basename( dirname( $this->plugin_file ) ) );
 		App::bind( 'dependencies', new Dependencies() );
-		App::get( 'dependencies' )->register_hooks();
 		App::bind( 'profile_cpt', new Profile_CPT() );
-		App::get( 'profile_cpt' )->register_hooks();
 		App::bind( 'profile_meta', new Profile_Meta() );
-		App::get( 'profile_meta' )->register_hooks();
 		App::bind( 'profile_ajax', new Ajax() );
+
+		$this->init_dependencies();
+	}
+
+	/**
+	 * Register hooks for all dependencies.
+	 *
+	 * @since 1.0.0
+	 */
+	public function init_dependencies() {
+		App::get( 'dependencies' )->register_hooks();
+		App::get( 'profile_cpt' )->register_hooks();
+		App::get( 'profile_meta' )->register_hooks();
 		App::get( 'profile_ajax' )->register_hooks();
 	}
 }
