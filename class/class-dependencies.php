@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Dependencies for the plugin.
  *
@@ -30,6 +31,18 @@ class Dependencies {
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 		// Enqueue admin scripts.
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_scripts' ] );
+		// Inject template.
+		add_action( 'wp_footer', array( $this, 'inject_template' ) );
+	}
+
+	/**
+	 * Inject markup and template onto page.
+	 *
+	 * @since 1.0.0
+	 */
+	public function inject_template() {
+		include Helpers::view( 'modal-tmpl' );
+		include Helpers::view( 'modal' );
 	}
 
 	/**
