@@ -25,12 +25,8 @@ class Dependencies {
 	public function register_hooks() {
 		// Enqueue styles.
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
-		// Enqueue admin styles.
-		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_styles' ] );
 		// Enqueue scripts.
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
-		// Enqueue admin scripts.
-		add_action( 'admin_enqueue_scripts', [ $this, 'admin_scripts' ] );
 		// Inject template.
 		add_action( 'wp_footer', array( $this, 'inject_template' ) );
 	}
@@ -40,6 +36,7 @@ class Dependencies {
 	 *
 	 * @since 1.0.0
 	 *
+	 * @throws \Exception Nothing registered.
 	 * @return void
 	 */
 	public function inject_template() {
@@ -51,25 +48,18 @@ class Dependencies {
 	}
 
 	/**
-	 * Enqueue admin scripts.
-	 *
-	 * @since 1.0.0
-	 */
-	public function admin_scripts() {
-		wp_enqueue_script(
-			App::get( 'basename' ) . 'admin-js',
-			App::get( 'plugin_url' ) . 'assets/js/admin.js',
-			[ 'jquery' ],
-			App::get( 'version' )
-		);
-	}
-
-	/**
 	 * Enqueue public styles.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @throws \Exception Nothing registered.
+	 * @return void
 	 */
 	public function enqueue_styles() {
+		if ( ! is_post_type_archive( 'profile' ) ) {
+			return;
+		}
+
 		wp_enqueue_style(
 			App::get( 'basename' ) . '-style',
 			App::get( 'plugin_url' ) . 'assets/css/main.css',
@@ -79,29 +69,22 @@ class Dependencies {
 	}
 
 	/**
-	 * Enqueue admin styles.
-	 *
-	 * @since 1.0.0
-	 */
-	public function enqueue_admin_styles() {
-		wp_enqueue_style(
-			App::get( 'basename' ) . 'admin-style',
-			App::get( 'plugin_url' ) . 'assets/css/admin.css',
-			[],
-			App::get( 'version' )
-		);
-	}
-
-	/**
 	 * Enqueue public scripts.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @throws \Exception Nothing registered.
+	 * @return void
 	 */
 	public function enqueue_scripts() {
+		if ( ! is_post_type_archive( 'profile' ) ) {
+			return;
+		}
+
 		wp_enqueue_script(
 			App::get( 'basename' ) . '-js',
 			App::get( 'plugin_url' ) . 'assets/js/main.js',
-			[ 'jquery' ],
+			[ 'jquery', 'wp-util' ],
 			App::get( 'version' )
 		);
 	}
