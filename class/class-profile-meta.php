@@ -2,6 +2,12 @@
 
 namespace WPCCT;
 
+/**
+ * Class Profile_Meta.
+ *
+ * @package WPCCT
+ * @since 1.0.0
+ */
 class Profile_Meta {
 
 	/**

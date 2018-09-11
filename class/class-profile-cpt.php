@@ -5,7 +5,7 @@ namespace WPCCT;
 /**
  * Class Profile_CPT.
  *
- * @package WPSP
+ * @package WPCCT
  * @since 1.0.0
  */
 class Profile_CPT {
