@@ -4,5 +4,8 @@
 
 // Import styles.
 import './scss/main.scss';
+import Modal from './components/modal';
 
-console.log('frontend');
+document.addEventListener( 'DOMContentLoaded', function() {
+	Modal();
+});
