@@ -1,0 +1,96 @@
+//--------------------------------------------------------------
+// Profile
+//--------------------------------------------------------------
+.profile-modal {
+	display: none;
+
+	&.opened {
+		display: block;
+	}
+
+	.loader {
+		left: 50%;
+		opacity: 0;
+		position: absolute;
+		top: 50%;
+		transform: translate(-50%);
+	}
+
+	&.loading {
+
+		.loader {
+			opacity: 1;
+		}
+
+		.profile-content {
+			opacity: 0;
+		}
+	}
+
+	.profile-content {
+		height: 100%;
+		opacity: 1;
+		overflow-x: scroll;
+	}
+
+	&.overlay {
+		background: rgba(0,0,0, 0.8);
+		bottom: 0;
+		left: 0;
+		position: fixed;
+		right: 0;
+		top: 0;
+	}
+
+	&-container {
+		background: white;
+		height: 90%;
+		left: 50%;
+		max-width: 960px;
+		min-height: 300px;
+		padding: 30px;
+		position: absolute;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: 80%;
+	}
+
+	.close-modal {
+		font-size: 25px;
+		height: 50px;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 50px;
+	}
+
+	.next-link {
+		background: #fff;
+		font-size: 25px;
+		height: 50px;
+		padding-top: 4px;
+		position: absolute;
+		text-align: center;
+		text-decoration: none;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 50px;
+
+		&.next {
+			right: -50px;
+		}
+
+		&.previous {
+			left: -50px;
+		}
+	}
+
+	.animate-out {
+		animation: out 600ms ease-in-out forwards;
+	}
+
+	.animate-in {
+		animation: in 500ms ease-in-out forwards;
+		display: block;
+	}
+}

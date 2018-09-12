@@ -1,6 +1,7 @@
 //--------------------------------------------------------------
-// Place Sass Imports Here.
+// Global Styles
 //--------------------------------------------------------------
-@import 'global';
-@import 'animations.scss';
-@import 'modal';
+.modal-open {
+	overflow: hidden;
+}
+
