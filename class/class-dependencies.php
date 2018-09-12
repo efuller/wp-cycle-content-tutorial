@@ -87,5 +87,17 @@ class Dependencies {
 			[ 'jquery', 'wp-util' ],
 			App::get( 'version' )
 		);
+
+		$data = array(
+			'ajaxurl'    => admin_url( 'admin-ajax.php' ),
+			'ajax_nonce' => wp_create_nonce( 'wpcct_nonce' ),
+		);
+
+		wp_localize_script(
+			App::get( 'basename' ) . '-js',
+			'WPCCT',
+			$data
+		);
+
 	}
 }
