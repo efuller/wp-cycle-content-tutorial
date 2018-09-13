@@ -40,7 +40,17 @@ export default function() {
 
 		const id = parseInt( e.target.getAttribute( 'data-id' ) );
 
-		openModal( id )( e );
+		const data = {
+			action: 'wpcct_get_post',
+			nonce: WPCCT.ajax_nonce,
+			id
+		};
+
+		axios.post( WPCCT.ajaxurl, querystring.stringify( data ) )
+			.then( res => {
+				const html = template( res.data );
+				cache.modalContent.innerHTML = html;
+			});
 	}
 
 	function openModal( id ) {
