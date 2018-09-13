@@ -1,26 +1,21 @@
 //--------------------------------------------------------------
 // Animations
 //--------------------------------------------------------------
-@keyframes out {
-	0% {
-		transform: translate(-50%, -50%);
-	}
-
-	100% {
-		transform: translate(-50%, -200%);
-
-	}
+.animate-out {
+	animation: out 600ms ease-in-out forwards;
 }
 
-@keyframes in {
-	0% {
-		opacity: 0;
-		transform: translate(-50%, -200%);
-	}
+.animate-in {
+	animation: in 500ms ease-in-out forwards;
+	display: block;
+}
 
-	100% {
-		opacity: 1;
-		transform: translateX(-50%, -50%);
-	}
+.animate-left {
+	animation: left 500ms ease-in-out forwards;
+	display: block;
+}
 
+.animate-right {
+	animation: right 500ms ease-in-out forwards;
+	display: block;
 }
