@@ -24,6 +24,7 @@ export default function() {
 			modal: document.querySelector( '.profile-modal' ),
 			modalContainer: document.querySelector( '.profile-modal-container' ),
 			modalContent: document.querySelector( '.profile-content' ),
+			modalPost: document.querySelector( '.profile-content .post' ),
 			articles: Array.from( document.querySelectorAll( '.hentry' ) ),
 			closeBtn: document.querySelector( '.close-modal' )
 		};
@@ -39,6 +40,10 @@ export default function() {
 		}
 
 		const id = parseInt( e.target.getAttribute( 'data-id' ) );
+		document.querySelector( '.profile-content .post').classList.add( 'animate-left' );
+
+		delay( 500 )
+			.then( () => document.querySelector( '.profile-content .post' ).classList.remove( 'animate-left' ) );
 
 		const data = {
 			action: 'wpcct_get_post',
@@ -50,6 +55,9 @@ export default function() {
 			.then( res => {
 				const html = template( res.data );
 				cache.modalContent.innerHTML = html;
+				document.querySelector( '.profile-content .post').classList.add( 'animate-right' );
+				delay( 500 )
+					.then( () => document.querySelector( '.profile-content .post' ).classList.remove( 'animate-right' ) );
 			});
 	}
 
