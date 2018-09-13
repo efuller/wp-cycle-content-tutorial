@@ -29,8 +29,11 @@
 
 	.profile-content {
 		height: 100%;
-		opacity: 1;
+	}
+
+	.post {
 		overflow-x: scroll;
+		transition: opacity 0.3s;
 	}
 
 	&.overlay {
@@ -57,11 +60,12 @@
 
 	.close-modal {
 		font-size: 25px;
-		height: 50px;
+		height: 40px;
+		padding: 0;
 		position: absolute;
 		right: 0;
 		top: 0;
-		width: 50px;
+		width: 40px;
 	}
 
 	.next-link {
@@ -83,14 +87,5 @@
 		&.previous {
 			left: -50px;
 		}
-	}
-
-	.animate-out {
-		animation: out 600ms ease-in-out forwards;
-	}
-
-	.animate-in {
-		animation: in 500ms ease-in-out forwards;
-		display: block;
 	}
 }
