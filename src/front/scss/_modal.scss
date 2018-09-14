@@ -29,11 +29,25 @@
 
 	.profile-content {
 		height: 100%;
+		overflow: hidden;
 	}
 
 	.post {
 		overflow-x: scroll;
 		transition: opacity 0.3s;
+	}
+
+	.post-header {
+		display: flex;
+
+		h1 {
+			margin-bottom: 10px;
+		}
+	}
+
+	.featured-image {
+		margin-bottom: 20px;
+		margin-right: 20px;
 	}
 
 	&.overlay {
