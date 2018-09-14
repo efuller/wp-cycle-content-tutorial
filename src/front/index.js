@@ -7,5 +7,5 @@ import './scss/main.scss';
 import Modal from './components/modal';
 
 document.addEventListener( 'DOMContentLoaded', function() {
-	Modal();
+	Modal( window.WPCCT );
 });

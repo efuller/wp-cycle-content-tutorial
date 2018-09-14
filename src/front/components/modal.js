@@ -1,10 +1,13 @@
-import axios from 'axios';
-import querystring from 'querystring';
-import { delay } from './helpers';
+import { delay, api } from './helpers';
 
-export default function() {
+export default function( globals = {} ) {
 	const cache = cacheDOM();
 	const template = wp.template( 'profile' );
+	const data = {
+		action: 'wpcct_get_post',
+		nonce: globals.ajax_nonce,
+	};
+	const apiCall = api( globals.ajaxurl );
 
 	bindEvents();
 
@@ -45,13 +48,9 @@ export default function() {
 		delay( 500 )
 			.then( () => document.querySelector( '.profile-content .post' ).classList.remove( 'animate-left' ) );
 
-		const data = {
-			action: 'wpcct_get_post',
-			nonce: WPCCT.ajax_nonce,
-			id
-		};
+		const postData = { ...data, id };
 
-		axios.post( WPCCT.ajaxurl, querystring.stringify( data ) )
+		apiCall( postData )
 			.then( res => {
 				const html = template( res.data );
 				cache.modalContent.innerHTML = html;
@@ -73,13 +72,9 @@ export default function() {
 			delay( 600 )
 				.then( () => cache.modalContainer.classList.remove( 'animate-in' ) );
 
-			const data = {
-				action: 'wpcct_get_post',
-				nonce: WPCCT.ajax_nonce,
-				id
-			};
+			const postData = { ...data, id };
 
-			axios.post( WPCCT.ajaxurl, querystring.stringify( data ) )
+			apiCall( postData )
 				.then( res => {
 					const html = template( res.data );
 					cache.modalContent.innerHTML = html;
