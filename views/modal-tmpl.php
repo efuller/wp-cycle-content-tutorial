@@ -6,7 +6,13 @@
 <script type="text/html" id="tmpl-profile">
 	<article class="post">
 		<header class="post-header">
-			<h1 class="entry-title">{{ data.title }}</h1>
+			<div class="featured-image">
+				<img src="{{ data.image }}" alt="{{ data.title }}" />
+			</div>
+			<div class="header-content">
+				<h1 class="entry-title">{{ data.title }}</h1>
+				<em>{{ data.job_title }}</em>
+			</div>
 		</header>
 		<div class="post-content">
 			{{{ data.content }}}

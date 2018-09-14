@@ -57,6 +57,9 @@ class Profile_CPT {
 		add_action( 'init', [ $this, 'setup_cpt' ] );
 	}
 
+	/**
+	 * Get profile post.
+	 */
 	public function get_profile_post() {
 		$post_id = intval( $_POST['id'] );
 
@@ -68,20 +71,24 @@ class Profile_CPT {
 
 		$old_post = $post;
 
-		$post          = get_post( $post_id );
+		$post          = get_post( $post_id ); //@codingStandardsIgnoreLine
 		$next_post     = get_next_post();
 		$previous_post = get_previous_post();
+		$image         = get_the_post_thumbnail_url( $post_id, 'medium' );
+		$job_title     = get_post_meta( $post_id, '_wpcct_meta_key', true );
 
 		$data = [
 			'title'            => $post->post_title,
 			'content'          => $post->post_content,
+			'job_title'        => $job_title ? $job_title : '',
 			'next_article'     => ! empty( $next_post ) ? get_the_permalink( $next_post->ID ) : false,
 			'previous_article' => ! empty( $previous_post ) ? get_the_permalink( $previous_post->ID ) : false,
 			'next_id'          => ! empty( $next_post ) ? $next_post->ID : 0,
 			'previous_id'      => ! empty( $previous_post ) ? $previous_post->ID : 0,
+			'image'            => $image ? $image : '',
 		];
 
-		$post = $old_post;
+		$post = $old_post; //@codingStandardsIgnoreLine
 
 		wp_send_json( $data );
 	}
