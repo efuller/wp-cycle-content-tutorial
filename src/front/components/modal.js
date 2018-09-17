@@ -25,7 +25,7 @@ export default function( globals = {} ) {
 	function cacheDOM() {
 		return {
 			modal: document.querySelector( '.profile-modal' ),
-			modalContainer: document.querySelector( '.profile-modal-container' ),
+			modalContainer: document.querySelector( '.profile-modal.container' ),
 			modalContent: document.querySelector( '.profile-content' ),
 			modalPost: document.querySelector( '.profile-content .post' ),
 			articles: Array.from( document.querySelectorAll( '.hentry' ) ),

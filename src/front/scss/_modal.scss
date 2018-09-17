@@ -57,19 +57,25 @@
 		position: fixed;
 		right: 0;
 		top: 0;
+		z-index: 1;
+
+		.modal-open & {
+			display: block;
+		}
 	}
 
-	&-container {
+	&.container {
 		background: white;
 		height: 90%;
 		left: 50%;
 		max-width: 960px;
 		min-height: 300px;
 		padding: 30px;
-		position: absolute;
+		position: fixed;
 		top: 50%;
 		transform: translate(-50%, -50%);
 		width: 80%;
+		z-index: 2;
 	}
 
 	.close-modal {
