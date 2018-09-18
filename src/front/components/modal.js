@@ -9,8 +9,6 @@ export default function( globals = {} ) {
 	};
 	const apiCall = api( globals.ajaxurl );
 
-	bindEvents();
-
 	cache.articles.forEach( article => {
 		let id = article.getAttribute( 'id' );
 		id = parseInt( id.match( /\d+/ )[0], 10 );
@@ -20,6 +18,46 @@ export default function( globals = {} ) {
 	function bindEvents() {
 		cache.closeBtn.addEventListener( 'click', closeModal );
 		cache.modal.addEventListener( 'click', maybeOpenModal );
+		cache.modal.addEventListener( 'keydown', handleKeyDown );
+	}
+
+	function handleKeyDown( e ) {
+		const KEY_TAB = 9;
+
+		function handleBackwardTab() {
+			if ( document.activeElement === cache.focusable[0] ) {
+				e.preventDefault();
+				cache.focusable[cache.focusable.length -1].focus();
+			}
+		}
+		function handleForwardTab() {
+			if ( document.activeElement === cache.focusable[cache.focusable.length -1]) {
+				e.preventDefault();
+				cache.focusable[0].focus();
+			}
+		}
+
+		switch(e.keyCode) {
+			case KEY_TAB:
+				if ( cache.focusable.length === 1 ) {
+					e.preventDefault();
+					break;
+				}
+
+				if ( e.shiftKey ) {
+					handleBackwardTab();
+				} else {
+					handleForwardTab();
+				}
+
+				break;
+			default:
+				break;
+		} // end switch
+	}
+
+	function findFocusableElements() {
+		return Array.from( cache.modal.querySelectorAll('a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex="0"]') );
 	}
 
 	function cacheDOM() {
@@ -29,7 +67,7 @@ export default function( globals = {} ) {
 			modalContent: document.querySelector( '.profile-content' ),
 			modalPost: document.querySelector( '.profile-content .post' ),
 			articles: Array.from( document.querySelectorAll( '.hentry' ) ),
-			closeBtn: document.querySelector( '.close-modal' )
+			closeBtn: document.querySelector( '.close-modal' ),
 		};
 	}
 
@@ -54,7 +92,9 @@ export default function( globals = {} ) {
 			.then( res => {
 				const html = template( res.data );
 				cache.modalContent.innerHTML = html;
+				cache.focusable = findFocusableElements();
 				document.querySelector( '.profile-content .post').classList.add( 'animate-right' );
+				cache.focusable[0].focus();
 				delay( 500 )
 					.then( () => document.querySelector( '.profile-content .post' ).classList.remove( 'animate-right' ) );
 			});
@@ -68,6 +108,7 @@ export default function( globals = {} ) {
 			document.body.classList.add( 'modal-open' );
 			cache.modal.classList.add( 'opened', 'loading' );
 			cache.modalContainer.classList.add( 'animate-in' );
+			cache.focusBefore = document.activeElement;
 
 			delay( 600 )
 				.then( () => cache.modalContainer.classList.remove( 'animate-in' ) );
@@ -78,7 +119,10 @@ export default function( globals = {} ) {
 				.then( res => {
 					const html = template( res.data );
 					cache.modalContent.innerHTML = html;
+					cache.focusable = findFocusableElements();
+					debugger;
 					cache.modal.classList.remove( 'loading' );
+					cache.focusable[0].focus();
 				});
 		};
 	}
@@ -96,5 +140,8 @@ export default function( globals = {} ) {
 			});
 
 		cache.modalContent.innerHTML = '';
+		cache.focusBefore.focus();
 	}
+
+	bindEvents();
 }

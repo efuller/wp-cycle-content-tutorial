@@ -10,11 +10,11 @@
 				<img src="{{ data.image }}" alt="{{ data.title }}" />
 			</div>
 			<div class="header-content">
-				<h1 class="entry-title">{{ data.title }}</h1>
+				<h1 id="profile-title" class="entry-title">{{ data.title }}</h1>
 				<em>{{ data.job_title }}</em>
 			</div>
 		</header>
-		<div class="post-content">
+		<div class="post-content" id="dialog-description">
 			{{{ data.content }}}
 		</div>
 
