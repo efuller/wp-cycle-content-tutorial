@@ -1,12 +1,15 @@
 import * as helpers from './helpers';
 
-
 export default function( document = {}, globals = {} ) {
 	const cache = helpers.cacheDOM( document );
 	const template = wp.template( 'profile' );
 	const defaultPostData = helpers.createPostDataDefaults( 'wpcct_get_post', globals.ajax_nonce );
 	const apiCall = helpers.api( globals.ajaxurl );
 
+	/**
+	 * Handle shift + tab.
+	 * @param e
+	 */
 	function handleBackwardTab( e ) {
 		if ( document.activeElement === cache.focusable[0] ) {
 			e.preventDefault();
@@ -14,6 +17,10 @@ export default function( document = {}, globals = {} ) {
 		}
 	}
 
+	/**
+	 * Handle tab key.
+	 * @param e
+	 */
 	function handleForwardTab( e ) {
 		if ( document.activeElement === cache.focusable[cache.focusable.length -1]) {
 			e.preventDefault();
@@ -21,6 +28,10 @@ export default function( document = {}, globals = {} ) {
 		}
 	}
 
+	/**
+	 * Handle key down event.
+	 * @param e
+	 */
 	function handleKeyDown( e ) {
 		const KEY_TAB = 9;
 
@@ -43,6 +54,10 @@ export default function( document = {}, globals = {} ) {
 		} // end switch
 	}
 
+	/**
+	 * Maybe open the modal.
+	 * @param e
+	 */
 	function maybeOpenModal( e ) {
 		e.preventDefault();
 
@@ -72,6 +87,11 @@ export default function( document = {}, globals = {} ) {
 			});
 	}
 
+	/**
+	 * Open modal.
+	 * @param id
+	 * @returns {Function}
+	 */
 	function openModal( id ) {
 
 		return function( e ) {
@@ -98,6 +118,10 @@ export default function( document = {}, globals = {} ) {
 		};
 	}
 
+	/**
+	 * Close modal.
+	 * @param e
+	 */
 	function closeModal( e ) {
 		e.preventDefault();
 
@@ -114,6 +138,9 @@ export default function( document = {}, globals = {} ) {
 		cache.focusBefore.focus();
 	}
 
+	/**
+	 * Bind events.
+	 */
 	function bindEvents() {
 		helpers.bindArticleEvents( cache.articles )( openModal );
 		cache.closeBtn.addEventListener( 'click', closeModal );
