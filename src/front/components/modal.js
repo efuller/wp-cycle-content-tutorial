@@ -1,13 +1,14 @@
-import { delay, api } from './helpers';
+import * as helpers from './helpers';
 
-export default function( globals = {} ) {
-	const cache = cacheDOM();
+
+
+export default function( document = {}, globals = {} ) {
+	const cache = helpers.cacheDOM( document );
 	const template = wp.template( 'profile' );
-	const data = {
-		action: 'wpcct_get_post',
-		nonce: globals.ajax_nonce,
-	};
-	const apiCall = api( globals.ajaxurl );
+	const defaultPostData = helpers.createPostDataDefaults( 'wpcct_get_post', globals.ajax_nonce );
+	const apiCall = helpers.api( globals.ajaxurl );
+
+	console.log('first this', this);
 
 	cache.articles.forEach( article => {
 		let id = article.getAttribute( 'id' );
@@ -16,6 +17,7 @@ export default function( globals = {} ) {
 	});
 
 	function bindEvents() {
+		console.log('second this', this);
 		cache.closeBtn.addEventListener( 'click', closeModal );
 		cache.modal.addEventListener( 'click', maybeOpenModal );
 		cache.modal.addEventListener( 'keydown', handleKeyDown );
@@ -60,17 +62,6 @@ export default function( globals = {} ) {
 		return Array.from( cache.modal.querySelectorAll('a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex="0"]') );
 	}
 
-	function cacheDOM() {
-		return {
-			modal: document.querySelector( '.profile-modal' ),
-			modalContainer: document.querySelector( '.profile-modal.container' ),
-			modalContent: document.querySelector( '.profile-content' ),
-			modalPost: document.querySelector( '.profile-content .post' ),
-			articles: Array.from( document.querySelectorAll( '.hentry' ) ),
-			closeBtn: document.querySelector( '.close-modal' ),
-		};
-	}
-
 	function maybeOpenModal( e ) {
 		e.preventDefault();
 
@@ -83,10 +74,10 @@ export default function( globals = {} ) {
 		const id = parseInt( e.target.getAttribute( 'data-id' ) );
 		document.querySelector( '.profile-content .post').classList.add( 'animate-left' );
 
-		delay( 500 )
+		helpers.delay( 500 )
 			.then( () => document.querySelector( '.profile-content .post' ).classList.remove( 'animate-left' ) );
 
-		const postData = { ...data, id };
+		const postData = { ...defaultPostData, id };
 
 		apiCall( postData )
 			.then( res => {
@@ -95,7 +86,7 @@ export default function( globals = {} ) {
 				cache.focusable = findFocusableElements();
 				document.querySelector( '.profile-content .post').classList.add( 'animate-right' );
 				cache.focusable[0].focus();
-				delay( 500 )
+				helpers.delay( 500 )
 					.then( () => document.querySelector( '.profile-content .post' ).classList.remove( 'animate-right' ) );
 			});
 	}
@@ -110,17 +101,16 @@ export default function( globals = {} ) {
 			cache.modalContainer.classList.add( 'animate-in' );
 			cache.focusBefore = document.activeElement;
 
-			delay( 600 )
+			helpers.delay( 600 )
 				.then( () => cache.modalContainer.classList.remove( 'animate-in' ) );
 
-			const postData = { ...data, id };
+			const postData = { ...defaultPostData, id };
 
 			apiCall( postData )
 				.then( res => {
 					const html = template( res.data );
 					cache.modalContent.innerHTML = html;
 					cache.focusable = findFocusableElements();
-					debugger;
 					cache.modal.classList.remove( 'loading' );
 					cache.focusable[0].focus();
 				});
@@ -132,7 +122,7 @@ export default function( globals = {} ) {
 
 		cache.modalContainer.classList.add( 'animate-out' );
 
-		delay( 600 )
+		helpers.delay( 600 )
 			.then( () => {
 				document.body.classList.remove( 'modal-open' );
 				cache.modal.classList.remove( 'opened', 'loading' );
