@@ -6,6 +6,6 @@
 import './scss/main.scss';
 import Modal from './components/modal';
 
-document.addEventListener( 'DOMContentLoaded', function() {
-	Modal( window.WPCCT );
+document.addEventListener( 'DOMContentLoaded', () => {
+	Modal( document, window.WPCCT );
 });

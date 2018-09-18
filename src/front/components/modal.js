@@ -1,27 +1,11 @@
 import * as helpers from './helpers';
 
 
-
 export default function( document = {}, globals = {} ) {
 	const cache = helpers.cacheDOM( document );
 	const template = wp.template( 'profile' );
 	const defaultPostData = helpers.createPostDataDefaults( 'wpcct_get_post', globals.ajax_nonce );
 	const apiCall = helpers.api( globals.ajaxurl );
-
-	console.log('first this', this);
-
-	cache.articles.forEach( article => {
-		let id = article.getAttribute( 'id' );
-		id = parseInt( id.match( /\d+/ )[0], 10 );
-		article.addEventListener( 'click', openModal( id ) );
-	});
-
-	function bindEvents() {
-		console.log('second this', this);
-		cache.closeBtn.addEventListener( 'click', closeModal );
-		cache.modal.addEventListener( 'click', maybeOpenModal );
-		cache.modal.addEventListener( 'keydown', handleKeyDown );
-	}
 
 	function handleBackwardTab( e ) {
 		if ( document.activeElement === cache.focusable[0] ) {
@@ -29,6 +13,7 @@ export default function( document = {}, globals = {} ) {
 			cache.focusable[cache.focusable.length -1].focus();
 		}
 	}
+
 	function handleForwardTab( e ) {
 		if ( document.activeElement === cache.focusable[cache.focusable.length -1]) {
 			e.preventDefault();
@@ -58,10 +43,6 @@ export default function( document = {}, globals = {} ) {
 		} // end switch
 	}
 
-	function findFocusableElements() {
-		return Array.from( cache.modal.querySelectorAll('a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex="0"]') );
-	}
-
 	function maybeOpenModal( e ) {
 		e.preventDefault();
 
@@ -83,7 +64,7 @@ export default function( document = {}, globals = {} ) {
 			.then( res => {
 				const html = template( res.data );
 				cache.modalContent.innerHTML = html;
-				cache.focusable = findFocusableElements();
+				cache.focusable = helpers.findFocusableElements( cache.modal );
 				document.querySelector( '.profile-content .post').classList.add( 'animate-right' );
 				cache.focusable[0].focus();
 				helpers.delay( 500 )
@@ -110,7 +91,7 @@ export default function( document = {}, globals = {} ) {
 				.then( res => {
 					const html = template( res.data );
 					cache.modalContent.innerHTML = html;
-					cache.focusable = findFocusableElements();
+					cache.focusable = helpers.findFocusableElements( cache.modal );
 					cache.modal.classList.remove( 'loading' );
 					cache.focusable[0].focus();
 				});
@@ -131,6 +112,13 @@ export default function( document = {}, globals = {} ) {
 
 		cache.modalContent.innerHTML = '';
 		cache.focusBefore.focus();
+	}
+
+	function bindEvents() {
+		helpers.bindArticleEvents( cache.articles )( openModal );
+		cache.closeBtn.addEventListener( 'click', closeModal );
+		cache.modal.addEventListener( 'click', maybeOpenModal );
+		cache.modal.addEventListener( 'keydown', handleKeyDown );
 	}
 
 	bindEvents();
