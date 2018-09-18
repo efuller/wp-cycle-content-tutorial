@@ -21,23 +21,23 @@ export default function( globals = {} ) {
 		cache.modal.addEventListener( 'keydown', handleKeyDown );
 	}
 
+	function handleBackwardTab( e ) {
+		if ( document.activeElement === cache.focusable[0] ) {
+			e.preventDefault();
+			cache.focusable[cache.focusable.length -1].focus();
+		}
+	}
+	function handleForwardTab( e ) {
+		if ( document.activeElement === cache.focusable[cache.focusable.length -1]) {
+			e.preventDefault();
+			cache.focusable[0].focus();
+		}
+	}
+
 	function handleKeyDown( e ) {
 		const KEY_TAB = 9;
 
-		function handleBackwardTab() {
-			if ( document.activeElement === cache.focusable[0] ) {
-				e.preventDefault();
-				cache.focusable[cache.focusable.length -1].focus();
-			}
-		}
-		function handleForwardTab() {
-			if ( document.activeElement === cache.focusable[cache.focusable.length -1]) {
-				e.preventDefault();
-				cache.focusable[0].focus();
-			}
-		}
-
-		switch(e.keyCode) {
+		switch( e.keyCode ) {
 			case KEY_TAB:
 				if ( cache.focusable.length === 1 ) {
 					e.preventDefault();
@@ -45,9 +45,9 @@ export default function( globals = {} ) {
 				}
 
 				if ( e.shiftKey ) {
-					handleBackwardTab();
+					handleBackwardTab( e );
 				} else {
-					handleForwardTab();
+					handleForwardTab( e );
 				}
 
 				break;
