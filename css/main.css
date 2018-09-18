@@ -1,3 +1,6 @@
+.body {
+  z-index: 1; }
+
 .modal-open {
   overflow: hidden; }
 
@@ -15,6 +18,33 @@
     opacity: 1;
     transform: translateX(-50%, -50%); } }
 
+@keyframes left {
+  0% {
+    transform: translateX(0%); }
+  100% {
+    transform: translateX(-200%); } }
+
+@keyframes right {
+  0% {
+    transform: translateX(200%); }
+  100% {
+    transform: translateX(0%); } }
+
+.animate-out {
+  animation: out 600ms ease-in-out forwards; }
+
+.animate-in {
+  animation: in 500ms ease-in-out forwards;
+  display: block; }
+
+.animate-left {
+  animation: left 500ms ease-in-out forwards;
+  display: block; }
+
+.animate-right {
+  animation: right 500ms ease-in-out forwards;
+  display: block; }
+
 .profile-modal {
   display: none; }
   .profile-modal.opened {
@@ -31,33 +61,47 @@
     opacity: 0; }
   .profile-modal .profile-content {
     height: 100%;
-    opacity: 1;
-    overflow-x: scroll; }
+    overflow: hidden; }
+  .profile-modal .post {
+    overflow-x: scroll;
+    transition: opacity 0.3s; }
+  .profile-modal .post-header {
+    display: flex; }
+    .profile-modal .post-header h1 {
+      margin-bottom: 10px; }
+  .profile-modal .featured-image {
+    margin-bottom: 20px;
+    margin-right: 20px; }
   .profile-modal.overlay {
     background: rgba(0, 0, 0, 0.8);
     bottom: 0;
     left: 0;
     position: fixed;
     right: 0;
-    top: 0; }
-  .profile-modal-container {
+    top: 0;
+    z-index: 2; }
+    .modal-open .profile-modal.overlay {
+      display: block; }
+  .profile-modal.container {
     background: white;
     height: 90%;
     left: 50%;
     max-width: 960px;
     min-height: 300px;
     padding: 30px;
-    position: absolute;
+    position: fixed;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 80%; }
+    width: 80%;
+    z-index: 3; }
   .profile-modal .close-modal {
     font-size: 25px;
-    height: 50px;
+    height: 40px;
+    padding: 0;
     position: absolute;
     right: 0;
     top: 0;
-    width: 50px; }
+    width: 40px; }
   .profile-modal .next-link {
     background: #fff;
     font-size: 25px;
@@ -73,8 +117,3 @@
       right: -50px; }
     .profile-modal .next-link.previous {
       left: -50px; }
-  .profile-modal .animate-out {
-    animation: out 600ms ease-in-out forwards; }
-  .profile-modal .animate-in {
-    animation: in 500ms ease-in-out forwards;
-    display: block; }
