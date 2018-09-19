@@ -130,7 +130,7 @@ export default function( document = {}, globals = {} ) {
 
 		cache.modalContainer.classList.add( 'animate-out' );
 
-		helpers.delay( 600 )
+		helpers.delay( 400 )
 			.then( () => {
 				document.body.classList.remove( 'modal-open' );
 				cache.modal.classList.remove( 'opened', 'loading' );
