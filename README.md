@@ -23,6 +23,9 @@ You can find it here: https://github.com/efuller/wp-starter-plugin
 4. After adding some profiles, visit the `/profile` page.
 5. Click on an article and watch the magic happen!
 
+### Example
+![](https://d.pr/i/ueBeBo+)
+
 ### Props
 [Jeffery Way](https://laracasts.com/) - For the dependency injection container idea.  
 [bitsofcode](https://bitsofco.de/accessible-modal-dialog/) - Ideas on creating an accessible modal.
