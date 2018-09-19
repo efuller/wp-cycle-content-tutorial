@@ -24,7 +24,7 @@ You can find it here: https://github.com/efuller/wp-starter-plugin
 5. Click on an article and watch the magic happen!
 
 ### Example
-![](https://d.pr/i/ueBeBo+)
+![](https://d.pr/i/Tv8XzU+)
 
 ### Props
 [Jeffery Way](https://laracasts.com/) - For the dependency injection container idea.  
