@@ -14,6 +14,7 @@ namespace WPCCT;
  * Dependency injection container.
  *
  * @since 1.0.0
+ * @package WPCCT
  */
 class App {
 
@@ -22,9 +23,8 @@ class App {
 	 *
 	 * @static
 	 *
-	 * @var array
-	 *
 	 * @since 1.0.0
+	 * @var array
 	 */
 	protected static $registry = [];
 
@@ -33,10 +33,9 @@ class App {
 	 *
 	 * @static
 	 *
+	 * @since 1.0.0
 	 * @param string $key   Name of the dependency.
 	 * @param mixed  $value The dependency being registered.
-	 *
-	 * @since 1.0.0
 	 */
 	public static function bind( $key, $value ) {
 		static::$registry[ $key ] = $value;
@@ -47,11 +46,9 @@ class App {
 	 *
 	 * @static
 	 *
-	 * @param $key
-	 * @throws \Exception If no key is provided.
-	 *
 	 * @since 1.0.0
-	 *
+	 * @param string $key Name of registered dependency.
+	 * @throws \Exception If no key is provided.
 	 * @return mixed
 	 */
 	public static function get( $key ) {
@@ -66,7 +63,6 @@ class App {
 	 * Helper that returns the registered dependencies.
 	 *
 	 * @since 1.0.0
-	 *
 	 * @return array $registry Current dependencies.
 	 */
 	public function get_registry() {

@@ -12,22 +12,23 @@ namespace WPCCT;
  * Bootstrap Class
  *
  * @since 1.0.0
+ * @package WPCCT
  */
 class Bootstrap {
 
 	/**
 	 * Current version.
 	 *
-	 * @var string
 	 * @since 1.0.0
+	 * @var string
 	 */
 	const VERSION = '1.0.0';
 
 	/**
 	 * Main plugin file.
 	 *
-	 * @var string
 	 * @since 1.0.0
+	 * @var string
 	 */
 	protected $plugin_file = '';
 

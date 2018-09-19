@@ -12,6 +12,8 @@ class Profile_CPT {
 
 	/**
 	 * Register CPT.
+	 *
+	 * @since 1.0.0
 	 */
 	public function setup_cpt() {
 		$labels = [
@@ -52,6 +54,8 @@ class Profile_CPT {
 
 	/**
 	 * Register custom WordPress hooks.
+	 *
+	 * @since 1.0.0
 	 */
 	public function register_hooks() {
 		add_action( 'init', [ $this, 'setup_cpt' ] );
@@ -59,6 +63,8 @@ class Profile_CPT {
 
 	/**
 	 * Get profile post.
+	 *
+	 * @since 1.0.0
 	 */
 	public function get_profile_post() {
 		$post_id = intval( $_POST['id'] );

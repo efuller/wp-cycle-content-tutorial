@@ -14,11 +14,13 @@ namespace WPCCT;
  * Functions used globally.
  *
  * @since 1.0.0
+ * @package WPCCT
  */
 class Helpers {
 	/**
 	 * Return path to view template.
 	 *
+	 * @since 1.0.0
 	 * @param string $file Name of the file. No extension.
 	 * @return string The path to the file.
 	 */
@@ -33,6 +35,7 @@ class Helpers {
 	 * Get the absolute path to this plugin's root directory, with
 	 * trailing slash.
 	 *
+	 * @since 1.0.0
 	 * @return string The path.
 	 */
 	public static function get_plugin_dir() {
@@ -42,6 +45,7 @@ class Helpers {
 	/**
 	 * Get the URL to this plugin's root directory, with trailing slash.
 	 *
+	 * @since 1.0.0
 	 * @return string The URL.
 	 */
 	public static function get_plugin_url() {
@@ -51,6 +55,7 @@ class Helpers {
 	/**
 	 * Get the name of this plugin's root directory.
 	 *
+	 * @since 1.0.0
 	 * @return string Directory name on empty string on failure.
 	 */
 	public static function get_plugin_dir_name() {

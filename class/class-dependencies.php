@@ -12,8 +12,8 @@ namespace WPCCT;
 /**
  * Class Dependencies.
  *
- * @package WPSP
  * @since 1.0.0
+ * @package WPCCT
  */
 class Dependencies {
 
@@ -35,7 +35,6 @@ class Dependencies {
 	 * Inject markup and template onto page.
 	 *
 	 * @since 1.0.0
-	 *
 	 * @throws \Exception Nothing registered.
 	 * @return void
 	 */
@@ -51,7 +50,6 @@ class Dependencies {
 	 * Enqueue public styles.
 	 *
 	 * @since 1.0.0
-	 *
 	 * @throws \Exception Nothing registered.
 	 * @return void
 	 */
@@ -72,7 +70,6 @@ class Dependencies {
 	 * Enqueue public scripts.
 	 *
 	 * @since 1.0.0
-	 *
 	 * @throws \Exception Nothing registered.
 	 * @return void
 	 */
@@ -98,6 +95,5 @@ class Dependencies {
 			'WPCCT',
 			$data
 		);
-
 	}
 }

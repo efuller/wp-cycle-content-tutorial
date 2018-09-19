@@ -12,6 +12,8 @@ class Profile_Meta {
 
 	/**
 	 * Add metabox.
+	 *
+	 * @since 1.0.0
 	 */
 	public function add_metabox() {
 		add_meta_box(
@@ -25,6 +27,7 @@ class Profile_Meta {
 	/**
 	 * Display the metabox.
 	 *
+	 * @since 1.0.0
 	 * @param object $post The post.
 	 */
 	public function metabox_markup( $post ) {
@@ -39,7 +42,9 @@ class Profile_Meta {
 	/**
 	 * Save the post meta.
 	 *
+	 * @since 1.0.0
 	 * @param int $post_id The post id.
+	 * @return void
 	 */
 	public function save( $post_id ) {
 		if ( ! isset( $_POST['profile_meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['profile_meta_box_nonce'], '_wp_profile_action' ) ) {
@@ -61,6 +66,8 @@ class Profile_Meta {
 
 	/**
 	 * Register custom hooks.
+	 *
+	 * @since 1.0.0
 	 */
 	public function register_hooks() {
 		add_action( 'add_meta_boxes_profile', [ $this, 'add_metabox' ] );
