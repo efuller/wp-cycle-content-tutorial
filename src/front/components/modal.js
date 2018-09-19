@@ -6,6 +6,9 @@ export default function( document = {}, globals = {} ) {
 	const defaultPostData = helpers.createPostDataDefaults( 'wpcct_get_post', globals.ajax_nonce );
 	const apiCall = helpers.api( globals.ajaxurl );
 
+	const KEY_TAB = 9;
+	const KEY_ESC = 27;
+
 	/**
 	 * Handle shift + tab.
 	 * @param e
@@ -33,7 +36,6 @@ export default function( document = {}, globals = {} ) {
 	 * @param e
 	 */
 	function handleKeyDown( e ) {
-		const KEY_TAB = 9;
 
 		switch( e.keyCode ) {
 			case KEY_TAB:
@@ -47,8 +49,9 @@ export default function( document = {}, globals = {} ) {
 				} else {
 					handleForwardTab( e );
 				}
-
 				break;
+			case KEY_ESC:
+				closeModal( e );
 			default:
 				break;
 		} // end switch
